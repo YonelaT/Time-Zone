@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeZone</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+
+</head>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.45/moment-timezone-with-data-1970-2030.min.js"></script>
+<style>
+    select {
+        display: block;
+        padding: 5px 8px;
+        border-radius: 4px;
+        min-width: 200px;
+        margin: 15px 0;
+
+    }
+</style>
+</head>
+
+<body>
+
+    <body>
+        <div id="today"></div>
+        <label for="city"> What is your favourite city?</label>
+        <select name="city" id="city">
+            <option>Select a city</option>
+            <option value="Africa/Cape Town"> Cape Town</option>
+            <option value="Africa/Johannesburg">Johannesburg</option>
+            <option value="Africa/Harare">Harare</option>
+            <option value="Africa/Bulawayo"> Bulawayo</option>
+        </select>
+
+        <div id="timezone"></div>
+        <script>
+            function showSelectedCity(event) {
+                const timezone = event.target.value;
+                if (timezone) {
+                    const currentTime = moment().tz(timezone).format('dddd, MMMM Do YYYY, h:mm:ss a');
+                    document.getElementById("timezone").innerHTML = `Current time in ${event.target.options[event.target.selectedIndex].text}: ${currentTime}`;
+                } else {
+                    document.getElementById("timezone").innerHTML = '';
+
+
+                }
+            }
+            let city = document.getElementById("city");
+            city.addEventListener("change", showSelectedCity);
+            let today = moment().format('dddd Do MMMM');
+            let todayElement = document.querySelector('#today');
+            todayElement.innerHTML = `Today is ${today}`;
+
+        </script>
+    </body>
+
+</html>
